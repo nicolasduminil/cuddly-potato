@@ -67,7 +67,8 @@
         <version>1.5.3</version>
         <executions>
           <execution>
-            <phase>prepare-package</phase>
+            <id>Adjust CSS file locations</id>
+            <phase>initialize</phase>
             <goals>
               <goal>replace</goal>
             </goals>
