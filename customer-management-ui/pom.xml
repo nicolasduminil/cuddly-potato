@@ -78,6 +78,28 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>com.google.code.maven-replacer-plugin</groupId>
+        <artifactId>replacer</artifactId>
+        <version>1.5.3</version>
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>replace</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <file>${project.basedir}/ng-customers/node_modules/primeng/resources/components/colorpicker/colorpicker.css</file>
+          <replacements>
+            <replacement>
+              <token>./images/</token>
+              <value>../../../resources/images/</value>
+            </replacement>
+          </replacements>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
