@@ -93,6 +93,7 @@
               <includes>
                 <include>${project.basedir}/ng-customers/node_modules/primeng/resources/components/colorpicker/colorpicker.css</include>
                 <include>${project.basedir}/ng-customers/node_modules/primeng/resources/components/lightbox/lightbox.css</include>
+                <include>${project.basedir}/ng-customers/node_modules/primeng/resources/components/password/password.css</include>
               </includes>
               <replacements>
                 <replacement>
