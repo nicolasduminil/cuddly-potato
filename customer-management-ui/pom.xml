@@ -90,7 +90,6 @@
         <version>1.5.0</version>
         <executions>
           <execution>
-          <execution>
             <id>angular-cli build</id>
             <configuration>
               <workingDirectory>${project.basedir}/ng-customers</workingDirectory>
