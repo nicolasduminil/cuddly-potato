@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   displayDialog: boolean;
   customer: Customer = new PrimeCustomer();
   newCustomer: boolean;
+  selectedCustomer: Customer;
 
   constructor(private customersService: CustomersService) {}
 
@@ -73,6 +74,10 @@ export class AppComponent implements OnInit {
     for(let prop in c)
       customer[prop] = c[prop];
     return customer;
+  }
+
+  findSelectedCustomerIndex(): number {
+    return this.customers.indexOf(this.selectedCustomer);
   }
 }
 
