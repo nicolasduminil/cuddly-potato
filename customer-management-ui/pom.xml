@@ -59,37 +59,6 @@
               </arguments>
             </configuration>
           </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>com.google.code.maven-replacer-plugin</groupId>
-        <artifactId>replacer</artifactId>
-        <version>1.5.3</version>
-        <executions>
-          <execution>
-            <id>Adjust CSS file locations</id>
-            <phase>initialize</phase>
-            <goals>
-              <goal>replace</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <file>${project.basedir}/ng-customers/node_modules/primeng/resources/components/colorpicker/colorpicker.css
-          </file>
-          <replacements>
-            <replacement>
-              <token>./images/</token>
-              <value>../../../resources/images/</value>
-            </replacement>
-          </replacements>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.5.0</version>
-        <executions>
           <execution>
             <id>angular-cli build</id>
             <configuration>
@@ -106,6 +75,32 @@
             <goals>
               <goal>exec</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.google.code.maven-replacer-plugin</groupId>
+        <artifactId>replacer</artifactId>
+        <version>1.5.3</version>
+        <executions>
+          <execution>
+            <id>Adjust PrimeNg CSS files locations</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>replace</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>${project.basedir}/ng-customers/node_modules/primeng/resources/components/colorpicker/colorpicker.css</include>
+                <include>${project.basedir}/ng-customers/node_modules/primeng/resources/components/lightbox/lightbox.css</include>
+              </includes>
+              <replacements>
+                <replacement>
+                  <token>./images/</token>
+                  <value>../../../resources/images/</value>
+                </replacement>
+              </replacements>
+            </configuration>
           </execution>
         </executions>
       </plugin>
