@@ -78,34 +78,44 @@
           </execution>
         </executions>
       </plugin>
-      <!--plugin>
-        <groupId>com.google.code.maven-replacer-plugin</groupId>
-        <artifactId>replacer</artifactId>
-        <version>1.5.3</version>
+      <plugin>
+        <groupId>com.coderplus.maven.plugins</groupId>
+        <artifactId>copy-rename-maven-plugin</artifactId>
+        <version>1.0</version>
         <executions>
           <execution>
-            <id>Adjust PrimeNg CSS files locations</id>
+            <id>copy-file</id>
             <phase>initialize</phase>
             <goals>
-              <goal>replace</goal>
+              <goal>copy</goal>
             </goals>
             <configuration>
-              <includes>
-                <include>${project.basedir}/ng-customers/node_modules/primeng/resources/components/colorpicker/colorpicker.css</include>
-                <include>${project.basedir}/ng-customers/node_modules/primeng/resources/components/lightbox/lightbox.css</include>
-                <include>${project.basedir}/ng-customers/node_modules/primeng/resources/components/password/password.css</include>
-                <include>${project.basedir}/ng-customers/node_modules/primeng/resources/components/tree/tree.css</include>
-              </includes>
-              <replacements>
-                <replacement>
-                  <token>./images/</token>
-                  <value>../../../resources/images/</value>
-                </replacement>
-              </replacements>
+              <fileSets>
+                <fileSet>
+                  <sourceFile>${basedir}/ng-customers/node_modules/primeng/resources/images/color.png</sourceFile>
+                  <destinationFile>${basedir}/ng-customers/node_modules/primeng/resources/components/colorpicker/images/color.png</destinationFile>
+                </fileSet>
+                <fileSet>
+                  <sourceFile>${basedir}/ng-customers/node_modules/primeng/resources/images/hue.png</sourceFile>
+                  <destinationFile>${basedir}/ng-customers/node_modules/primeng/resources/components/colorpicker/images/hue.png</destinationFile>
+                </fileSet>
+                <fileSet>
+                  <sourceFile>${basedir}/ng-customers/node_modules/primeng/resources/images/loading.gif</sourceFile>
+                  <destinationFile>${basedir}/ng-customers/node_modules/primeng/resources/components/lightbox/images/loading.gif</destinationFile>
+                </fileSet>
+                <fileSet>
+                  <sourceFile>${basedir}/ng-customers/node_modules/primeng/resources/images/password-meter.png</sourceFile>
+                  <destinationFile>${basedir}/ng-customers/node_modules/primeng/resources/components/password/images/password-meter.png</destinationFile>
+                </fileSet>
+                <fileSet>
+                  <sourceFile>${basedir}/ng-customers/node_modules/primeng/resources/images/line.gif</sourceFile>
+                  <destinationFile>${basedir}/ng-customers/node_modules/primeng/resources/components/tree/images/line.gif</destinationFile>
+                </fileSet>
+              </fileSets>
             </configuration>
           </execution>
         </executions>
-      </plugin-->
+      </plugin>
       <plugin>
         <groupId>com.spotify</groupId>
         <artifactId>dockerfile-maven-plugin</artifactId>
