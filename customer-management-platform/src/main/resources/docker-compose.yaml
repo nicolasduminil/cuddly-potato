@@ -1,0 +1,47 @@
+version: '3.7'
+networks:
+  of-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.96.0/20
+services:
+  oracle:
+    image: oracleinanutshell/oracle-xe-11g:latest
+    networks:
+      of-network:
+        ipv4_address: 192.168.96.3
+    hostname: oracle
+    container_name: oracle
+    ports:
+      - 49161:1521
+      - 5500:5500
+    environment:
+      ORACLE_ALLOW_REMOTE: "true"
+      ORACLE_DISABLE_ASYNCH_IO: "true"
+    volumes:
+      - ../scripts/oracle:/docker-entrypoint-initdb.d
+  customers-api:
+    image: customers-management-api:1.0-SNAPSHOT
+    networks:
+      of-network:
+        ipv4_address: 192.168.96.2
+    hostname: customers-api
+    container_name: customers-api
+    depends_on:
+      - oracle
+    ports:
+      - 8080:8080
+  customers-ui:
+    image: customers-management-ui:1.0-SNAPSHOT
+    networks:
+      of-network:
+        ipv4_address: 192.168.96.6
+    hostname: customers-ui
+    container_name: customers-ui
+    depends_on:
+      - oracle
+      - customers-api
+    ports:
+      - 8080:80
