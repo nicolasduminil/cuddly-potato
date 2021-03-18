@@ -22,19 +22,30 @@ services:
       ORACLE_DISABLE_ASYNCH_IO: "true"
     volumes:
       - ../scripts/oracle:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: [ "CMD-SHELL", "tnsping xe" ]
+      interval: 10s
+      timeout: 2s
+      retries: 10
   customers-api:
-    image: customers-management-api:1.0-SNAPSHOT
+    image: customer-management-api:1.0-SNAPSHOT
     networks:
       of-network:
         ipv4_address: 192.168.96.2
     hostname: customers-api
     container_name: customers-api
+    volumes:
+      - ../scripts/run.sh:/usr/local/share/run.sh
     depends_on:
       - oracle
     ports:
       - 8080:8080
+    environment:
+      ORACLE_HOST: 192.168.96.3
+      ORACLE_PORT: 1521
+    entrypoint: /usr/local/share/run.sh
   customers-ui:
-    image: customers-management-ui:1.0-SNAPSHOT
+    image: customer-management-ui:1.0-SNAPSHOT
     networks:
       of-network:
         ipv4_address: 192.168.96.6
@@ -44,4 +55,4 @@ services:
       - oracle
       - customers-api
     ports:
-      - 8080:80
+      - 80:8080
